@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastrar Veículo</title>
+</head>
+<body>
+    <form asp-action="Cadastrar" asp-controller="Veiculo" method="post">
+        <fieldset>
+            <legend>Cadastrar veículo</legend>
+            <label for="txtMarca">Marca:</label>
+            <input name="txtMarca" type="text" placeholder="Marca do Veículo" /><br />
+            <label for="txtModelo">Modelo:</label>
+            <input name="txtModelo" type="text" placeholder="Modelo do Veículo" /><br />
+            <label for="txtPlaca">Placa:</label>
+            <input name="txtPlaca" type="text" placeholder="Placa do Veículo" /><br />
+            <label for="txtRenavan">Renavan:</label>
+            <input name="txtRenavan" type="text" placeholder="Renavan do Veículo" /><br />
+            <label for="txtCor">Cor:</label>
+            <input name="txtCor" type="text" placeholder="Cor do Veículo" /><br />
+            <label for="txtAno">Ano:</label>
+            <input name="txtAno" type="text" placeholder="Ano do Veículo" /><br />
+            <label for="txtTipoCombustivel">Tipo Combustivel:</label>
+            <input name="txtTipoCombustivel" type="text" placeholder="Combustivel do Veículo" /><br />
+            <label for="txtTipoCategoria">Categoria Veiculo:</label>
+            <input name="txtTipoCategoria" type="text" placeholder="Categoria do Veículo" /><br />
+            <label for="txtQntdPortas">Quantidade Portas:</label>
+            <input name="txtQntdPortas" type="text" placeholder="Qntd. portas do Veículo" /><br />
+            <label for="txtPotencia">Potência:</label>
+            <input name="txtPotencia" type="text" placeholder="Potência do Veículo" /><br />
+
+            <input type="submit" value="Cadastrar" />
+        </fieldset>
+    </form>
+</body>
+</html>
