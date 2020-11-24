@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cadastrar Funcionario</title>
+</head>
+<body>
+    <form asp-action="Cadastrar" asp-controller="Funcionario" method="post">
+        <fieldset>
+            <legend>Cadastrar funcionario</legend>
+            <label for="txtNome">Nome:</label>
+            <input name="txtNome" type="text" placeholder="Nome funcionario:" /><br />
+            <label for="txtData">Data:</label>
+            <input name="txtData" type="text" placeholder="Data Nascimento:" /><br />
+            <label for="txtCpf">Cpf:</label>
+            <input name="txtCpf" type="text" placeholder="Cpf" /><br />
+            <label for="txtSexo">Sexo:</label>
+            <input name="txtSexo" type="text" placeholder="Sexo" /><br />
+
+
+            <input type="submit" value="Cadastrar" />
+        </fieldset>
+    </form>
+</body>
+</html>
