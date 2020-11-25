@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@*@using LocadoraWeb.Models*@
+@{ 
+    List<Veiculo> veiculos = ViewBag.Veiculos;
+    int quantidade = ViewBag.Quantidade;
+}
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -7,5 +12,51 @@
 <body>
     <h2>GERENCIAR VEÍCULO:</h2>
     <a asp-action="Cadastrar" asp-controller="Veiculo">CADASTRAR VEÍCULO</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Categoria veículo</th>
+                <th>Combustível</th>
+                <th>Cor</th>
+                <th>Número de portas</th>
+                <th>Ano</th>
+                <th>Potência</th>
+                <th>Placa</th>
+                <th>Criado Em</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Veiculo veiculoCadastrado in veiculos) 
+            { 
+            <tr>
+                <td>@veiculoCadastrado.Id</td>
+                <td>@veiculoCadastrado.Marca</td>
+                <td>@veiculoCadastrado.Modelo</td>
+                <td>@veiculoCadastrado.TipoCategoria</td>
+                <td>@veiculoCadastrado.TipoCombustivel</td>
+                <td>@veiculoCadastrado.Cor</td>
+                <td>@veiculoCadastrado.QntdPortas</td>
+                <td>@veiculoCadastrado.Ano</td>
+                <td>@veiculoCadastrado.Potencia</td>
+                <td>@veiculoCadastrado.Placa</td>
+                <td>@veiculoCadastrado.CriadoEm</td>
+                <td>
+                    <a asp-action="Remover" asp-controller="Veiculo"
+                       asp-route-id="@veiculoCadastrado.Id">
+                        Remover
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+    <p><b>Quantidade de registros: </b>@quantidade</p>
+    <p><b>Atualizado em: </b>@DateTime.Now</p>
 </body>
 </html>

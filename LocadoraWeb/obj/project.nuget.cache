@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0Z5e/WQndJj9OdeYC9wBbxMLOG6T+hIKeYKzyWa8iIcBJ6LlIBEmXfk5CwHsaV3LhCxop/ZKdOxwbQlUACBdfg==",
+  "dgSpecHash": "D5lEcSYCgnnhzHDadjsrsALXB+UGO67SwAGSnoWbasQp8PNJLi1gF2+NS2Qh75cFfpGnBL5vxbd4B0ziHG75Ag==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Weslley War\\Desktop\\LocadoraWeb\\LocadoraWeb\\LocadoraWeb.csproj",
+  "projectFilePath": "C:\\Users\\Weslley War\\Desktop\\Nova pasta\\LocadoraWeb\\LocadoraWeb\\LocadoraWeb.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Weslley War\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Weslley War\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
