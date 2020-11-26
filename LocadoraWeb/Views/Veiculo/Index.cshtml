@@ -28,6 +28,7 @@
                 <th>Placa</th>
                 <th>Criado Em</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -49,6 +50,12 @@
                     <a asp-action="Remover" asp-controller="Veiculo"
                        asp-route-id="@veiculoCadastrado.Id">
                         Remover
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Alterar" asp-controller="Veiculo"
+                       asp-route-id="@veiculoCadastrado.Id">
+                        Alterar
                     </a>
                 </td>
             </tr>
