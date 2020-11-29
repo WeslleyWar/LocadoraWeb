@@ -11,5 +11,8 @@ namespace LocadoraWeb.Models
         public Context(DbContextOptions options): base(options) { }
         
         public DbSet<Veiculo> Veiculos { get; set; }
+
+        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<ItemLocacao> ItensLocacao { get; set; }
     }
 }

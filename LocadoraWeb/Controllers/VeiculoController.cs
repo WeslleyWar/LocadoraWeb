@@ -1,56 +1,88 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using LocadoraWeb.DAL;
 using LocadoraWeb.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LocadoraWeb.Controllers
 {
     public class VeiculoController : Controller
     {
-        private readonly Context _context;
+       private readonly VeiculoDAO _veiculoDAO;
+       private readonly CategoriaDAO _categoriaDAO;
+       private readonly IWebHostEnvironment _hosting;
 
-       public VeiculoController(Context context)
+       public VeiculoController(VeiculoDAO veiculoDAO, IWebHostEnvironment hosting, CategoriaDAO categoriaDAO)
         {
-            _context = context;
+            _veiculoDAO = veiculoDAO;
+            _categoriaDAO = categoriaDAO;
+            _hosting = hosting;
         }
 
         public IActionResult Index()
         {
-            List<Veiculo> veiculos = _context.Veiculos.ToList();
-            ViewBag.Veiculos = veiculos;
+            List<Veiculo> veiculos = _veiculoDAO.Listar();
+            ViewBag.Title = "Gerenciamento de Veículos";
             ViewBag.Quantidade = veiculos.Count;
-            return View();
+            return View(veiculos);
         }
 
-        public IActionResult Cadastrar() => View();
-        [HttpPost]
-        public IActionResult Cadastrar(string txtMarca, string txtModelo, string txtPlaca, 
-            string txtRenavan, string txtTipoCategoria, string txtTipoCombustivel, string txtCor, 
-            int txtQntdPortas, int txtAno, double txtPotencia)
+        public IActionResult Cadastrar()
         {
-            Veiculo veiculo = new Veiculo
+            ViewBag.Categorias = new SelectList(_categoriaDAO.Listar(), "Id", "Nome");
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Cadastrar(Veiculo veiculo, IFormFile file)
+        {
+            if (ModelState.IsValid)
             {
-                Marca = txtMarca,
-                Modelo = txtModelo,
-                Placa = txtPlaca,
-                Renavan = txtRenavan,
-                TipoCategoria = txtTipoCategoria,
-                TipoCombustivel = txtTipoCombustivel,
-                Cor = txtCor,
-                QntdPortas = Convert.ToInt32(txtQntdPortas),
-                Ano = Convert.ToInt32(txtAno),
-                Potencia = Convert.ToDouble(txtPotencia)
-            };
-            _context.Veiculos.Add(veiculo);
-            _context.SaveChanges();
-               return RedirectToAction("Index", "Veiculo");
+                if (file != null)
+                {
+                    string arquivo = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+                    string caminho = Path.Combine(_hosting.WebRootPath, "images", arquivo);
+                    file.CopyTo(new FileStream(caminho, FileMode.CreateNew));
+                    veiculo.Imagem = arquivo;
+                }
+                else
+                {
+                    veiculo.Imagem = "semImagem.jpg";
+                }
+
+                veiculo.Categoria = _categoriaDAO.BuscarPorId(veiculo.CategoriaId);
+
+                if (_veiculoDAO.Cadastrar(veiculo))
+                {
+                    return RedirectToAction("Index", "Veiculo");
+                }
+                ModelState.AddModelError("", "Não foi possivel cadastrar esse veículo.Placa já existente!");
+            }
+            ViewBag.Categorias = new SelectList(_categoriaDAO.Listar(), "Id", "Nome");
+            return View();   
         }
         public IActionResult Remover(int id)
         {
-            //Falta criar o metodo para remover
+            _veiculoDAO.Remover(id);
             return RedirectToAction("Index", "Veiculo");
         }
+
+        public IActionResult Alterar(int id)
+        {
+            return View(_veiculoDAO.BuscarPorId(id));
+        }
+
+        [HttpPost]
+        public IActionResult Alterar(Veiculo veiculo)
+        {
+            _veiculoDAO.Alterar(veiculo);
+            return RedirectToAction("Index", "Veiculo");
+        }
+
     }
 }
