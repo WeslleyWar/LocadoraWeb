@@ -52,7 +52,7 @@ namespace LocadoraWeb
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Veiculo}/{action=Index}/{id?}");
+                    pattern: "{controller=Cliente}/{action=Index}/{id?}");
             });
         }
     }

@@ -11,5 +11,6 @@ namespace LocadoraWeb.Models
         public Context(DbContextOptions options): base(options) { }
         
         public DbSet<Veiculo> Veiculos { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
     }
 }

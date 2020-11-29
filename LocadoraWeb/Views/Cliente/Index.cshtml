@@ -1,0 +1,58 @@
+﻿@*@using LocadoraWeb.Models*@
+@{
+    List<Cliente> clientes = ViewBag.Clientes;
+   
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Gerenciamento de Clientes</title>
+</head>
+<body>
+    <h2>Gerenciar Clientes:</h2>
+    <a asp-action="Cadastrar" asp-controller="Cliente">Cadastrar Clientes</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Email</th>
+                <th>Endereço</th>
+                <th>Habilitação</th>
+                <th>Categoria</th>
+                <th>Telefone</th>
+                <th>Criado Em</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Cliente clienteCadastrado in clientes)
+            {
+            <tr>
+                <td>@clienteCadastrado.Id</td>
+                <td>@clienteCadastrado.Nome</td>
+                <td>@clienteCadastrado.CPF</td>
+                <td>@clienteCadastrado.Email</td>
+                <td>@clienteCadastrado.Endereço</td>
+                <td>@clienteCadastrado.Habilitação</td>
+                <td>@clienteCadastrado.Categoria</td>
+                <td>@clienteCadastrado.Telefone</td>
+                <td>@clienteCadastrado.CriadoEm</td>
+                <td>
+                    <a asp-action="Remover" asp-controller="Cliente"
+                       asp-route-id="@clienteCadastrado.Id">
+                        Remover
+                    </a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+ 
+    <p><b>Atualizado em: </b>@DateTime.Now</p>
+</body>
+</html>
