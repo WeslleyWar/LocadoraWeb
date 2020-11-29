@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LocadoraWeb.DAL;
 using LocadoraWeb.Models;
+using LocadoraWeb.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -27,9 +29,17 @@ namespace LocadoraWeb
         
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<VeiculoDAO>();
+            services.AddScoped<CategoriaDAO>();
+            services.AddScoped<ItemLocacaoDAO>();
+            services.AddScoped<Sessao>();
+            services.AddHttpContextAccessor();
+
+
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Connection")));
 
+            services.AddSession();
             services.AddControllersWithViews();
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -48,11 +58,13 @@ namespace LocadoraWeb
 
             app.UseAuthorization();
 
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Veiculo}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
