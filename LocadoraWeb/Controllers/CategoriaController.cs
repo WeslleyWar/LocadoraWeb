@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LocadoraWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LocadoraWeb.Controllers
 {
+    [Authorize(Roles = "ADM")]
     public class CategoriaController : Controller
     {
         private readonly Context _context;

@@ -14,5 +14,6 @@ namespace LocadoraWeb.Models
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<ItemLocacao> ItensLocacao { get; set; }
         public DbSet<UsuarioView> Usuarios { get; set; }
+        //public DbSet<Usuario> Usuarioss { get; set; }
     }
 }

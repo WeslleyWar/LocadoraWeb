@@ -471,3 +471,4 @@ C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\ne
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Details.cshtml.g.cs
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Edit.cshtml.g.cs
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Index.cshtml.g.cs
+C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Login.cshtml.g.cs
