@@ -14,36 +14,19 @@ namespace LocadoraWeb.Controllers
     {
         private readonly Context _context;
         private readonly UserManager<Usuario> _userManager;
+        private readonly SignInManager<Usuario> _signInManager;
 
-
-        public UsuarioController(Context context, UserManager<Usuario> userManager)
+        public UsuarioController(Context context, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager)
         {
             _context = context;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         // GET: Usuario
         public async Task<IActionResult> Index()
         {
             return View(await _context.Usuarios.ToListAsync());
-        }
-
-        // GET: Usuario/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var usuarioView = await _context.Usuarios
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuarioView == null)
-            {
-                return NotFound();
-            }
-
-            return View(usuarioView);
         }
 
         // GET: Usuario/Create
@@ -87,89 +70,31 @@ namespace LocadoraWeb.Controllers
             }
         }
 
-        // GET: Usuario/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Login()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var usuarioView = await _context.Usuarios.FindAsync(id);
-            if (usuarioView == null)
-            {
-                return NotFound();
-            }
-            return View(usuarioView);
+            return View();
         }
 
-        // POST: Usuario/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //Login
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Email,Senha,Id,CriadoEm")] UsuarioView usuarioView)
+        public async Task<IActionResult> Login([Bind ("Email, Senha")] UsuarioView usuarioView)
         {
-            if (id != usuarioView.Id)
+            var result = await _signInManager.PasswordSignInAsync(usuarioView.Email, usuarioView.Senha, false, false);
+            return RedirectToAction("Index", "Veiculo");
+            if (result.Succeeded)
             {
-                return NotFound();
+                return RedirectToAction("Index", "Veiculo");
             }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(usuarioView);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UsuarioViewExists(usuarioView.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
+            ModelState.AddModelError("", "Os dados não conferem!");
             return View(usuarioView);
         }
 
-        // GET: Usuario/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        //Logout
+        public async Task<IActionResult> Logout()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var usuarioView = await _context.Usuarios
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (usuarioView == null)
-            {
-                return NotFound();
-            }
-
-            return View(usuarioView);
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
 
-        // POST: Usuario/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var usuarioView = await _context.Usuarios.FindAsync(id);
-            _context.Usuarios.Remove(usuarioView);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool UsuarioViewExists(int id)
-        {
-            return _context.Usuarios.Any(e => e.Id == id);
-        }
     }
 }

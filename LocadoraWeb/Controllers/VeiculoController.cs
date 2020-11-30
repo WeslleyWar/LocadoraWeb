@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LocadoraWeb.DAL;
 using LocadoraWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LocadoraWeb.Controllers
 {
+    //[Authorize] > Faz com que a action/controller necessite de uma autorização(estar logado) para ser acessado.
+    //[Authorize(Roles = "ADM")] > Faz com que somente usuario logados e autorizados como ADM possam acessar a função.
+    [Authorize(Roles = "ADM")]
     public class VeiculoController : Controller
     {
        private readonly VeiculoDAO _veiculoDAO;
