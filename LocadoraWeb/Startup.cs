@@ -7,6 +7,7 @@ using LocadoraWeb.Models;
 using LocadoraWeb.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,6 +40,14 @@ namespace LocadoraWeb
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Connection")));
 
+            services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<Context>().AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Usuario/Login";
+                options.AccessDeniedPath = "/Usuario/AcessoNegado";
+            });
+
             services.AddSession();
             services.AddControllersWithViews();
         }
@@ -55,6 +64,8 @@ namespace LocadoraWeb
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
