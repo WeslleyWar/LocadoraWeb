@@ -452,10 +452,6 @@ C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\bin\Debug\ne
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\bin\Debug\netcoreapp3.1\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\e_sqlite3.dll
-C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Categoria\Create.cshtml.g.cs
-C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Categoria\Delete.cshtml.g.cs
-C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Categoria\Details.cshtml.g.cs
-C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Categoria\Edit.cshtml.g.cs
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Categoria\Index.cshtml.g.cs
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Home\Confirmacao.cshtml.g.cs
@@ -466,9 +462,13 @@ C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\bin\Debug\ne
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\LocadoraWeb.csproj.CoreCompileInputs.cache
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\LocadoraWeb.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Create.cshtml.g.cs
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Delete.cshtml.g.cs
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Details.cshtml.g.cs
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Edit.cshtml.g.cs
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Index.cshtml.g.cs
 C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Login.cshtml.g.cs
+C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Categoria\Cadastrar.cshtml.g.cs
+C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Garagem\Index.cshtml.g.cs
+C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Garagem\Cadastrar.cshtml.g.cs
+C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Usuario\Cadastrar.cshtml.g.cs
+C:\Users\Weslley War\Desktop\Nova pasta (2)\LocadoraWeb\LocadoraWeb\obj\Debug\netcoreapp3.1\Razor\Views\Garagem\Lista.cshtml.g.cs

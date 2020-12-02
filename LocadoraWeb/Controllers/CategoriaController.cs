@@ -7,45 +7,34 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LocadoraWeb.Models;
 using Microsoft.AspNetCore.Authorization;
+using LocadoraWeb.DAL;
+using Microsoft.AspNetCore.Hosting;
 
 namespace LocadoraWeb.Controllers
 {
-    [Authorize(Roles = "ADM")]
+    //[Authorize(Roles = "ADM")]
     public class CategoriaController : Controller
     {
-        private readonly Context _context;
+        //private readonly Context _context;
+        private readonly CategoriaDAO _categoriaDAO;
+        private readonly IWebHostEnvironment _hosting;
 
-        public CategoriaController(Context context)
+        public CategoriaController(CategoriaDAO categoriaDAO, IWebHostEnvironment hosting)
         {
-            _context = context;
+            _categoriaDAO = categoriaDAO;
+            _hosting = hosting;
         }
 
         // GET: Categoria
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Categorias.ToListAsync());
-        }
-
-        // GET: Categoria/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var categoria = await _context.Categorias
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (categoria == null)
-            {
-                return NotFound();
-            }
-
-            return View(categoria);
-        }
+            List<Categoria> categorias = _categoriaDAO.Listar();
+            ViewBag.Title = "Gerenciamento de Categorias";
+            return View(categorias);
+        }       
 
         // GET: Categoria/Create
-        public IActionResult Create()
+        public IActionResult Cadastrar()
         {
             return View();
         }
@@ -55,100 +44,38 @@ namespace LocadoraWeb.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome,valorDiaria,Descricao,Id,CriadoEm")] Categoria categoria)
+        //public async Task<IActionResult> Cadastrar([Bind("Nome,valorDiaria,Descricao,Id,CriadoEm")] Categoria categoria)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(categoria);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(categoria);
+        //}
+
+        public IActionResult Cadastrar(string Nome, string Descricao, double valorDiaria)
         {
-            if (ModelState.IsValid)
+            Categoria categoria = new Categoria
             {
-                _context.Add(categoria);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(categoria);
+                Nome = Nome,
+                Descricao = Descricao,
+                valorDiaria = valorDiaria
+            };
+            _categoriaDAO.Cadastrar(categoria);
+            return RedirectToAction("Index", "Categoria");
         }
 
-        // GET: Categoria/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Remover(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var categoria = await _context.Categorias.FindAsync(id);
-            if (categoria == null)
-            {
-                return NotFound();
-            }
-            return View(categoria);
+            _categoriaDAO.Remover(id);
+            return RedirectToAction("Index", "Categoria");
         }
 
-        // POST: Categoria/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Nome,valorDiaria,Descricao,Id,CriadoEm")] Categoria categoria)
-        {
-            if (id != categoria.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(categoria);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CategoriaExists(categoria.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(categoria);
-        }
-
-        // GET: Categoria/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var categoria = await _context.Categorias
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (categoria == null)
-            {
-                return NotFound();
-            }
-
-            return View(categoria);
-        }
-
-        // POST: Categoria/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var categoria = await _context.Categorias.FindAsync(id);
-            _context.Categorias.Remove(categoria);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool CategoriaExists(int id)
-        {
-            return _context.Categorias.Any(e => e.Id == id);
-        }
+        //private bool CategoriaExists(int id)
+        //{
+        //    return _context.Categorias.Any(e => e.Id == id);
+        //}
     }
 }

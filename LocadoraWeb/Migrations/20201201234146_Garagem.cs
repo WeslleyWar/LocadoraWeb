@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LocadoraWeb.Migrations
 {
-    public partial class AddTableUsuario : Migration
+    public partial class Garagem : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,6 +44,56 @@ namespace LocadoraWeb.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Categorias",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CriadoEm = table.Column<DateTime>(nullable: false),
+                    Nome = table.Column<string>(nullable: true),
+                    valorDiaria = table.Column<double>(nullable: false),
+                    Descricao = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categorias", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Garagem",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CriadoEm = table.Column<DateTime>(nullable: false),
+                    Nome = table.Column<string>(nullable: true),
+                    Logradouro = table.Column<string>(nullable: true),
+                    Bairro = table.Column<string>(nullable: true),
+                    Cidade = table.Column<string>(nullable: true),
+                    Numero = table.Column<int>(nullable: false),
+                    Cep = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Garagem", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Usuarios",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CriadoEm = table.Column<DateTime>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    Senha = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuarios", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,6 +202,59 @@ namespace LocadoraWeb.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Veiculos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CriadoEm = table.Column<DateTime>(nullable: false),
+                    Marca = table.Column<string>(nullable: false),
+                    Modelo = table.Column<string>(nullable: false),
+                    Placa = table.Column<string>(maxLength: 8, nullable: false),
+                    Renavan = table.Column<string>(nullable: false),
+                    TipoCombustivel = table.Column<string>(nullable: true),
+                    Cor = table.Column<string>(nullable: true),
+                    QntdPortas = table.Column<int>(nullable: false),
+                    Ano = table.Column<int>(nullable: false),
+                    Potencia = table.Column<double>(nullable: false),
+                    Imagem = table.Column<string>(nullable: true),
+                    CategoriaId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Veiculos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Veiculos_Categorias_CategoriaId",
+                        column: x => x.CategoriaId,
+                        principalTable: "Categorias",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ItensLocacao",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CriadoEm = table.Column<DateTime>(nullable: false),
+                    VeiculoId = table.Column<int>(nullable: true),
+                    QntdDiasLocacao = table.Column<int>(nullable: false),
+                    Preco = table.Column<double>(nullable: false),
+                    CarrinhoId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItensLocacao", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ItensLocacao_Veiculos_VeiculoId",
+                        column: x => x.VeiculoId,
+                        principalTable: "Veiculos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -190,6 +293,16 @@ namespace LocadoraWeb.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItensLocacao_VeiculoId",
+                table: "ItensLocacao",
+                column: "VeiculoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Veiculos_CategoriaId",
+                table: "Veiculos",
+                column: "CategoriaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -210,10 +323,25 @@ namespace LocadoraWeb.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Garagem");
+
+            migrationBuilder.DropTable(
+                name: "ItensLocacao");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Veiculos");
+
+            migrationBuilder.DropTable(
+                name: "Categorias");
         }
     }
 }

@@ -30,7 +30,7 @@ namespace LocadoraWeb.Controllers
         }
 
         // GET: Usuario/Create
-        public IActionResult Create()
+        public IActionResult Cadastrar()
         {
             return View();
         }
@@ -40,14 +40,29 @@ namespace LocadoraWeb.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Email,Senha,Id,CriadoEm, ConfirmacaoSenha")] UsuarioView usuarioView)
+        public async Task<IActionResult> Cadastrar(UsuarioView usuarioView)
         {
             if (ModelState.IsValid)
             {
                 Usuario usuario = new Usuario
                 {
                     UserName = usuarioView.Email,
-                    Email = usuarioView.Email
+                    Email = usuarioView.Email,
+                    //Endereço
+                    Cep = usuarioView.Cep,
+                    Logradouro = usuarioView.Logradouro,
+                    Bairro = usuarioView.Bairro,
+                    Localidade = usuarioView.Localidade,
+                    Uf = usuarioView.Uf,
+                    Numero = usuarioView.Numero,
+                    //Dados pessoais
+                    Nome = usuarioView.Nome,
+                    Genero = usuarioView.Genero,
+                    Profissao = usuarioView.Profissao,
+                    AnoNasc = usuarioView.AnoNasc,
+                    Cnh = usuarioView.Cnh,
+                    Cpf = usuarioView.Cpf,
+                    Telefone = usuarioView.Telefone
                 };
 
                 IdentityResult resultado = await _userManager.CreateAsync(usuario, usuarioView.Senha);

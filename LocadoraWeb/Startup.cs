@@ -34,6 +34,7 @@ namespace LocadoraWeb
             services.AddScoped<CategoriaDAO>();
             services.AddScoped<ItemLocacaoDAO>();
             services.AddScoped<Sessao>();
+            services.AddScoped<GaragemDAO>();
             services.AddHttpContextAccessor();
 
 

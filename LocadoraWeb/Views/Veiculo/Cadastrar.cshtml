@@ -4,7 +4,6 @@
       enctype="multipart/form-data">
     <fieldset>
         <legend>Cadastrar veículo</legend>
-
         <div asp-validation-summary="ModelOnly"></div>
         <div class="form-group">
             <label asp-for="Marca">Marca:</label>
@@ -39,11 +38,11 @@
             <input class="form-control" asp-for="TipoCombustivel" type="text" placeholder="Combustivel do Veículo" />
             <span class="text-danger" asp-validation-for="TipoCombustivel"></span>
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label asp-for="TipoCategoria">Categoria Veiculo:</label>
             <input class="form-control" asp-for="TipoCategoria" type="text" placeholder="Categoria do Veículo" />
             <span class="text-danger" asp-validation-for="TipoCategoria"></span>
-        </div>
+        </div>*@
         <div class="form-group">
             <label asp-for="QntdPortas">Quantidade Portas:</label>
             <input class="form-control" asp-for="QntdPortas" type="text" placeholder="Qntd. portas do Veículo" />
@@ -57,7 +56,7 @@
             <input class="form-control" type="file" name="file" />
         </div>
         <div class="form-group">
-            <label asp-for="Categoria">Categoria::</label>
+            <label asp-for="Categoria">Categoria:</label>
             <select asp-items="@ViewBag.Categorias" class="form-control" asp-for="CategoriaId">
                 <option>  -- SELECIONE -- </option>
             </select>

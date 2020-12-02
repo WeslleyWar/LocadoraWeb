@@ -26,8 +26,8 @@ namespace LocadoraWeb.Models
         [Required(ErrorMessage = "Campo obrigatório!")]
         public string Renavan { get; set; }
 
-        [Required(ErrorMessage = "Campo obrigatório!")]
-        public string TipoCategoria { get; set; }
+        //[Required(ErrorMessage = "Campo obrigatório!")]
+        //public string TipoCategoria { get; set; }
 
         public string TipoCombustivel { get; set; }
         public string Cor { get; set; }
