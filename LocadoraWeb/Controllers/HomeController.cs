@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using LocadoraWeb.DAL;
 using LocadoraWeb.Models;
 using LocadoraWeb.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LocadoraWeb.Controllers
@@ -35,6 +36,7 @@ namespace LocadoraWeb.Controllers
             return View(_veiculoDAO.ListarPorCategoria(id));
         }
 
+        [Authorize(Roles = "Usuario")]
         public IActionResult Locar(int id)
         {
             Categoria categoria = _categoriaDAO.BuscarPorId(id);
@@ -50,6 +52,7 @@ namespace LocadoraWeb.Controllers
             _itemLocacaoDAO.Cadastrar(item);
             return RedirectToAction("Confirmacao");
         }
+        [Authorize(Roles = "Usuario")]
         public IActionResult Confirmacao()
         {
             string auxCarrinhoId = _sessao.BuscarCarrinhoId();

@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Weslley War\\Desktop\\Nova pasta (2)\\LocadoraWeb\\LocadoraWeb\\LocadoraWeb.csproj": {}
+    "C:\\Users\\Michael\\source\\repos\\LocadoraWeb\\LocadoraWeb\\LocadoraWeb\\LocadoraWeb.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Weslley War\\Desktop\\Nova pasta (2)\\LocadoraWeb\\LocadoraWeb\\LocadoraWeb.csproj": {
+    "C:\\Users\\Michael\\source\\repos\\LocadoraWeb\\LocadoraWeb\\LocadoraWeb\\LocadoraWeb.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Weslley War\\Desktop\\Nova pasta (2)\\LocadoraWeb\\LocadoraWeb\\LocadoraWeb.csproj",
+        "projectUniqueName": "C:\\Users\\Michael\\source\\repos\\LocadoraWeb\\LocadoraWeb\\LocadoraWeb\\LocadoraWeb.csproj",
         "projectName": "LocadoraWeb",
-        "projectPath": "C:\\Users\\Weslley War\\Desktop\\Nova pasta (2)\\LocadoraWeb\\LocadoraWeb\\LocadoraWeb.csproj",
-        "packagesPath": "C:\\Users\\Weslley War\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Weslley War\\Desktop\\Nova pasta (2)\\LocadoraWeb\\LocadoraWeb\\obj\\",
+        "projectPath": "C:\\Users\\Michael\\source\\repos\\LocadoraWeb\\LocadoraWeb\\LocadoraWeb\\LocadoraWeb.csproj",
+        "packagesPath": "C:\\Users\\Michael\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Michael\\source\\repos\\LocadoraWeb\\LocadoraWeb\\LocadoraWeb\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Weslley War\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Michael\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

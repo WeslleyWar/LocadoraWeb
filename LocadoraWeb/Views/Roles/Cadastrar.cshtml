@@ -1,0 +1,27 @@
+﻿@model LocadoraWeb.Models.Roles
+
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+
+<h1>Cadastrar</h1>
+
+<div class="col-md-4">
+    <form asp-action="Cadastrar">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="RoleNome" class="control-label">Nome da regra</label>
+            <input asp-for="RoleNome" class="form-control" />
+            <span asp-validation-for="RoleNome" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Descricao" class="control-label">Descrição da regra</label>
+            <input asp-for="Descricao" class="form-control" />
+            <span asp-validation-for="Descricao" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Cadastrar" class="btn btn-success" />
+        </div>
+    </form>
+</div>
+

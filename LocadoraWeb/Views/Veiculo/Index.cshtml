@@ -2,68 +2,165 @@
 @{
     int quantidade = ViewBag.Quantidade;
 }
-<h2 class="espacamento-baixo">GERENCIAR VEÍCULO:</h2>
 
-<a asp-action="Cadastrar" asp-controller="Veiculo" class="btn btn-info">CADASTRAR VEÍCULO</a>
 
-<table class="table table-hover ">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Marca</th>
-            <th>Modelo</th>
-            <th>Categoria veículo</th>
-            <th>Combustível</th>
-            <th>Cor</th>
-            <th>Número de portas</th>
-            <th>Ano</th>
-            <th>Potência</th>
-            <th>Placa</th>
-            <th>Imagem</th>
-            <th>Categoria</th>
-            <th>Criado Em</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Veiculo veiculoCadastrado in Model)
-        {
-            <tr>
-                <td>@veiculoCadastrado.Id</td>
-                <td>@veiculoCadastrado.Marca</td>
-                <td>@veiculoCadastrado.Modelo</td>
-                <td>@veiculoCadastrado.TipoCategoria</td>
-                <td>@veiculoCadastrado.TipoCombustivel</td>
-                <td>@veiculoCadastrado.Cor</td>
-                <td>@veiculoCadastrado.QntdPortas</td>
-                <td>@veiculoCadastrado.Ano</td>
-                <td>@veiculoCadastrado.Potencia</td>
-                <td>@veiculoCadastrado.Placa</td>
-                <td>
-                    <img src="~/images/@veiculoCadastrado.Imagem" 
-                         alt="@veiculoCadastrado.Modelo" style="width:120px; height:100px"/>
-                </td>
-                <td>
-                    @veiculoCadastrado.Categoria.Nome
-                </td>
-                <td>@veiculoCadastrado.CriadoEm</td>
-                <td>
-                    <a asp-action="Alterar" asp-controller="Veiculo" class="btn btn-warning btn-sm"
-                       asp-route-id="@veiculoCadastrado.Id">
-                        Alterar
-                    </a>
-                </td>
-                <td>
-                    <a asp-action="Remover" asp-controller="Veiculo" class="btn btn-danger btn-sm"
-                       asp-route-id="@veiculoCadastrado.Id">
-                        Remover
-                    </a>
-                </td>
-            </tr>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #more {
+            display: none;
         }
-    </tbody>
-</table>
+    </style>
+</head>
+<body>
+    <div class="row">
+        <!-- 4 + 8 = 12 -->
+        <div class="col-md-2"> </div>
+        <div class="col-md-8">
+            <h2 class="espacamento-baixo">Qual o seu estilo de carro?</h2>
+            <div class="card-deck">
 
-<p class="jogar-text-direita"><b>Quantidade de registros: </b>@quantidade</p>
-<p class="jogar-text-direita"><b>Atualizado em: </b>@DateTime.Now</p>
+                <div class="card">
+                    <img src="~/images/classicos.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Classicos</h5>
+                        <p class="card-text">Para ser considerado antigo, o carro precisa ter sido fabricado há mais de 30 anos e....</p>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal1">
+                            Saiba mais
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel1">Carros Esportivos</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Para ser considerado antigo, o carro precisa ter sido fabricado há mais de 30 anos e os itens dele têm de ser todos originais.
+                                        Para receber a placa preta do Detran, identificando o modelo como um clássico de coleção, o veículo passa por uma avaliação feita por clubes particulares.
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <a class="btn btn-primary" href="Garagem\Lista" role="button">Alugue o seu</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="card">
+                    <img src="~/images/sports.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Esportivo</h5>
+                        <p class="card-text">Carro esporte, é geralmente um automóvel pequeno, de dois lugares e duas portas....</p>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Saiba mais
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Carros Esportivos</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Carro esporte, é geralmente um automóvel pequeno, de dois lugares e duas portas desenhado para resposta rápida, fácil maneabilidade, e condução de alta velocidade.
+                                        De acordo com o dicionário Merriam-Webster, o primeiro uso conhecido do termo carro esporte ocorreu em 1928.
+                                        Carros esporte podem ser simples ou luxuosos, mas as características de grande manobrabilidade e baixo peso são requisitos essenciais.
+                                        Eles podem ser equipados para corridas, "especialmente na parte aerodinâmica fazendo dele um carro de um ou dois lugares com baixo centro de gravidade e sistema de direção e suspensão projetadas para controle preciso em altas velocidades.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <a class="btn btn-primary" href="Garagem\Lista" role="button">Alugue o seu</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+
+                    <img src="~/images/sedã.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Sedãs</h5>
+                        <p class="card-text">Uma carroceria sedã (do estrangeirismo sedan), também denominada berlina, turismo ou três volumes....</p>
+                    </div>
+                    <div class="card-footer">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">
+                            Saiba mais
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel2">Carros Sedãs</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Uma carroceria sedã (do estrangeirismo sedan), também denominada berlina, turismo ou três volumes, é um dos tipos mais comuns de carroceria e é o formato que a maioria das pessoas atualmente associa com o carro moderno.
+                                        Basicamente, entende-se por sedã um carro com duas fileiras de bancos, com espaço considerável no banco de trás para três adultos, e um compartimento traseiro, geralmente para bagagens.
+                                        Este compartimento traseiro é externo ao habitáculo dos passageiros e sua tampa não inclui o vidro traseiro.
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                                        <a class="btn btn-primary" href="Garagem\Lista" role="button">Alugue o seu</a>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    function myFunction() {
+                        var dots = document.getElementById("dots");
+                        var moreText = document.getElementById("more");
+                        var btnText = document.getElementById("myBtn");
+
+                        if (dots.style.display === "none") {
+                            dots.style.display = "inline";
+                            btnText.innerHTML = "Read more";
+                            moreText.style.display = "none";
+                        } else {
+                            dots.style.display = "none";
+                            btnText.innerHTML = "Read less";
+                            moreText.style.display = "inline";
+                        }
+                    }
+                </script>
+
+            </div>
+        </div>
+        <div class="col-md-2"> </div>
+
+    </div>
+</body>
+</html>

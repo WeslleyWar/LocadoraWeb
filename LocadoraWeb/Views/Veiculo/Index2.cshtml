@@ -1,0 +1,69 @@
+﻿@model List<Veiculo>
+@{
+    int quantidade = ViewBag.Quantidade;
+}
+<h2 class="espacamento-baixo">GERENCIAR VEÍCULO:</h2>
+
+<a asp-action="Cadastrar" asp-controller="Veiculo" class="btn btn-info">CADASTRAR VEÍCULO</a>
+
+<table class="table table-hover ">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            @*<th>Categoria veículo</th>*@
+            <th>Combustível</th>
+            <th>Cor</th>
+            <th>Número de portas</th>
+            <th>Ano</th>
+            <th>Potência</th>
+            <th>Placa</th>
+            <th>Imagem</th>
+            <th>Categoria</th>
+            <th>Criado Em</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Veiculo veiculoCadastrado in Model)
+        {
+            <tr>
+                <td>@veiculoCadastrado.Id</td>
+                <td>@veiculoCadastrado.Marca</td>
+                <td>@veiculoCadastrado.Modelo</td>
+                @*<td>@veiculoCadastrado.TipoCategoria</td>*@
+                <td>@veiculoCadastrado.TipoCombustivel</td>
+                <td>@veiculoCadastrado.Cor</td>
+                <td>@veiculoCadastrado.QntdPortas</td>
+                <td>@veiculoCadastrado.Ano</td>
+                <td>@veiculoCadastrado.Potencia</td>
+                <td>@veiculoCadastrado.Placa</td>
+                <td>
+                    <img src="~/images/@veiculoCadastrado.Imagem" 
+                         alt="@veiculoCadastrado.Modelo" style="width:120px; height:100px"/>
+                </td>
+                <td>
+                    @veiculoCadastrado.Categoria.Nome
+                </td>
+                <td>@veiculoCadastrado.CriadoEm</td>
+                <td>
+                    <a asp-action="Alterar" asp-controller="Veiculo" class="btn btn-warning btn-sm"
+                       asp-route-id="@veiculoCadastrado.Id">
+                        Alterar
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Remover" asp-controller="Veiculo" class="btn btn-danger btn-sm"
+                       asp-route-id="@veiculoCadastrado.Id">
+                        Remover
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p class="jogar-text-direita"><b>Quantidade de registros: </b>@quantidade</p>
+<p class="jogar-text-direita"><b>Atualizado em: </b>@DateTime.Now</p>

@@ -15,7 +15,7 @@ namespace LocadoraWeb.Controllers
 {
     //[Authorize] > Faz com que a action/controller necessite de uma autorização(estar logado) para ser acessado.
     //[Authorize(Roles = "ADM")] > Faz com que somente usuario logados e autorizados como ADM possam acessar a função.
-    [Authorize(Roles = "ADM")]
+   // [Authorize(Roles = "ADM")]
     public class VeiculoController : Controller
     {
        private readonly VeiculoDAO _veiculoDAO;
@@ -37,12 +37,15 @@ namespace LocadoraWeb.Controllers
             return View(veiculos);
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Cadastrar()
         {
             ViewBag.Categorias = new SelectList(_categoriaDAO.Listar(), "Id", "Nome");
             return View();
         }
+
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult Cadastrar(Veiculo veiculo, IFormFile file)
         {
             if (ModelState.IsValid)
@@ -70,21 +73,39 @@ namespace LocadoraWeb.Controllers
             ViewBag.Categorias = new SelectList(_categoriaDAO.Listar(), "Id", "Nome");
             return View();   
         }
+
+        [Authorize(Roles = "Admin")]
         public IActionResult Remover(int id)
         {
             _veiculoDAO.Remover(id);
             return RedirectToAction("Index", "Veiculo");
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult Alterar(int id)
         {
+            ViewBag.Categorias = new SelectList(_categoriaDAO.Listar(), "Id", "Nome");
             return View(_veiculoDAO.BuscarPorId(id));
         }
 
         [HttpPost]
-        public IActionResult Alterar(Veiculo veiculo)
+        [Authorize(Roles = "Admin")]
+        public IActionResult Alterar(Veiculo veiculo, IFormFile file)
         {
+
+            if (file != null)
+            {
+                string arquivo = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+                string caminho = Path.Combine(_hosting.WebRootPath, "images", arquivo);
+                file.CopyTo(new FileStream(caminho, FileMode.CreateNew));
+                veiculo.Imagem = arquivo;
+            }
+            else
+            {
+                veiculo.Imagem = "semImagem.jpg";
+            }
             _veiculoDAO.Alterar(veiculo);
+            ViewBag.Categorias = new SelectList(_categoriaDAO.Listar(), "Id", "Nome");
             return RedirectToAction("Index", "Veiculo");
         }
 

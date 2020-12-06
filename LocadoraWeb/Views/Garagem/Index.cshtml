@@ -1,0 +1,52 @@
+﻿@model IEnumerable<LocadoraWeb.Models.Garagem>
+
+@{
+    ViewData["Title"] = "Lista de Garagens";
+}
+
+<div class="col-md-2"> </div>
+<div class="col-md-8">
+    <h1>Lista de Garagens</h1>
+
+    <p>
+        <a asp-action="Cadastrar" class="btn btn-info">Cadastrar Novo</a>
+    </p>
+    <table class="table table-hover ">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Cep</th>
+                <th>Rua</th>
+                <th>Bairro</th>
+                <th>Cidade</th>
+                <th>Numero</th>
+                <th>Criado Em</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Garagem garagemCadastrada in Model)
+            {
+                <tr>
+                    <td>@garagemCadastrada.Id</td>
+                    <td>@garagemCadastrada.Nome</td>
+                    <td>@garagemCadastrada.Cep</td>
+                    <td>@garagemCadastrada.Logradouro</td>
+                    <td>@garagemCadastrada.Bairro</td>
+                    <td>@garagemCadastrada.Localidade</td>
+                    <td>@garagemCadastrada.Numero</td>
+                    <td>@garagemCadastrada.CriadoEm</td>
+                    <td>
+                        <a asp-action="Remover" asp-controller="Garagem" class="btn btn-danger btn-sm"
+                           asp-route-id="@garagemCadastrada.Id">
+                            Remover
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="col-md-2"> </div>

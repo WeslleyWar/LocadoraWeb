@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LocadoraWeb.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LocadoraWeb.Controllers
 {
@@ -14,23 +15,34 @@ namespace LocadoraWeb.Controllers
     {
         private readonly Context _context;
         private readonly UserManager<Usuario> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<Usuario> _signInManager;
 
-        public UsuarioController(Context context, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager)
+        //public UsuarioController(Context context, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager)
+        //{
+        //    _context = context;
+        //    _userManager = userManager;
+        //    _signInManager = signInManager;
+        //}
+
+        public UsuarioController(Context context, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager,
+            RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
+            _roleManager = roleManager;
             _signInManager = signInManager;
         }
 
         // GET: Usuario
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Usuarios.ToListAsync());
         }
 
         // GET: Usuario/Create
-        public IActionResult Create()
+        public IActionResult Cadastrar()
         {
             return View();
         }
@@ -40,22 +52,44 @@ namespace LocadoraWeb.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Email,Senha,Id,CriadoEm, ConfirmacaoSenha")] UsuarioView usuarioView)
+        public async Task<IActionResult> Cadastrar(UsuarioView usuarioView)
         {
             if (ModelState.IsValid)
             {
                 Usuario usuario = new Usuario
                 {
                     UserName = usuarioView.Email,
-                    Email = usuarioView.Email
+                    Email = usuarioView.Email,
+                    Perfil = usuarioView.Perfil,
+                    //Endereço
+                    Cep = usuarioView.Cep,
+                    Logradouro = usuarioView.Logradouro,
+                    Bairro = usuarioView.Bairro,
+                    Localidade = usuarioView.Localidade,
+                    Uf = usuarioView.Uf,
+                    Numero = usuarioView.Numero,
+                    //Dados pessoais
+                    Nome = usuarioView.Nome,
+                    Genero = usuarioView.Genero,
+                    Profissao = usuarioView.Profissao,
+                    AnoNasc = usuarioView.AnoNasc,
+                    Cnh = usuarioView.Cnh,
+                    Cpf = usuarioView.Cpf,
+                    Telefone = usuarioView.Telefone
                 };
 
                 IdentityResult resultado = await _userManager.CreateAsync(usuario, usuarioView.Senha);
                 if (resultado.Succeeded)
                 {
-                    _context.Add(usuarioView);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    var applicationRole = await _roleManager.FindByNameAsync(usuario.Perfil);
+                    if (applicationRole != null)
+                    {
+                        IdentityResult roleResult = await _userManager.AddToRoleAsync(usuario, applicationRole.Name);
+
+                        _context.Add(usuarioView);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
                 }
                 AdicionarErros(resultado);
             }
@@ -80,7 +114,7 @@ namespace LocadoraWeb.Controllers
         public async Task<IActionResult> Login([Bind ("Email, Senha")] UsuarioView usuarioView)
         {
             var result = await _signInManager.PasswordSignInAsync(usuarioView.Email, usuarioView.Senha, false, false);
-            return RedirectToAction("Index", "Veiculo");
+            return RedirectToAction("Index", "Home");
             if (result.Succeeded)
             {
                 return RedirectToAction("Index", "Veiculo");

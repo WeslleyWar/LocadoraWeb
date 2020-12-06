@@ -14,10 +14,10 @@
         <input asp-for="Senha" class="form-control" />
         <span asp-validation-for="Senha" class="text-danger"></span>
     </div>
-    <input type="submit" value="Login" class="btn btn-primary" />
+    <input type="submit" value="Login" class="btn btn-info" />
 </form>
 
 <div>
-    <a asp-action="Create" asp-controller="Usuario">Não possui conta?Cadastre-se!</a>
+    <a asp-action="Cadastrar" asp-controller="Usuario">Não possui conta?Cadastre-se!</a><br />
+    <a asp-action="Cadastrar" asp-controller="Funcionario">Trabalha conosco mas não possui conta?Cadastre-se!</a>
 </div>
-

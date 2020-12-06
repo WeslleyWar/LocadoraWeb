@@ -34,18 +34,27 @@ namespace LocadoraWeb
             services.AddScoped<CategoriaDAO>();
             services.AddScoped<ItemLocacaoDAO>();
             services.AddScoped<Sessao>();
+            services.AddScoped<GaragemDAO>();
             services.AddHttpContextAccessor();
 
 
             services.AddDbContext<Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("Connection")));
 
-            services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<Context>().AddDefaultTokenProviders();
+            //services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<Context>().AddDefaultTokenProviders();
+            services.AddIdentity<Usuario, IdentityRole>().AddRoles<IdentityRole>().AddEntityFrameworkStores<Context>().AddDefaultTokenProviders();
 
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = "/Usuario/Login";
                 options.AccessDeniedPath = "/Usuario/AcessoNegado";
+            });
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", UsuarioView => UsuarioView.RequireRole("Admin"));
+
+                options.AddPolicy("Usuario", UsuarioView => UsuarioView.RequireRole("Usuario"));
             });
 
             services.AddSession();

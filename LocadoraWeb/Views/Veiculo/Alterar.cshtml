@@ -1,32 +1,63 @@
 ﻿@model Veiculo
 
+@{
+    ViewData["Title"] = "Alterar Veiculo";
+}
 
-<form asp-action="Alterar" asp-controller="Veiculo" method="post">
+<form asp-action="Alterar" asp-controller="Veiculo" method="post" enctype="multipart/form-data">
     <fieldset>
         <legend>Alterar veículo</legend>
-        <label asp-for="Id">#Id:</label>
-        <input asp-for="Id" readonly type="text" /><br />
-
-        <label asp-for="Marca">Marca:</label>
-        <input asp-for="Marca" type="text" placeholder="Marca do Veículo" /><br />
-        <label asp-for="Modelo">Modelo:</label>
-        <input asp-for="Modelo" type="text" placeholder="Modelo do Veículo" /><br />
-        <label asp-for="Placa">Placa:</label>
-        <input asp-for="Placa" type="text" placeholder="Placa do Veículo" /><br />
-        <label asp-for="Renavan">Renavan:</label>
-        <input asp-for="Renavan" type="text" placeholder="Renavan do Veículo" /><br />
-        <label asp-for="Cor">Cor:</label>
-        <input asp-for="Cor" type="text" placeholder="Cor do Veículo" /><br />
-        <label asp-for="Ano">Ano:</label>
-        <input asp-for="Ano" type="text" placeholder="Ano do Veículo" /><br />
-        <label asp-for="TipoCombustivel">Tipo Combustivel:</label>
-        <input asp-for="TipoCombustivel" type="text" placeholder="Combustivel do Veículo" /><br />
-        <label asp-for="TipoCategoria">Categoria Veiculo:</label>
-        <input asp-for="TipoCategoria" type="text" placeholder="Categoria do Veículo" /><br />
-        <label asp-for="QntdPortas">Quantidade Portas:</label>
-        <input asp-for="QntdPortas" type="text" placeholder="Qntd. portas do Veículo" /><br />
-        <label asp-for="Potencia">Potência:</label>
-        <input asp-for="Potencia" type="text" placeholder="Potência do Veículo" /><br />
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
+            <label asp-for="Id">#Id:</label>
+            <input asp-for="Id" readonly type="text" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Marca">Marca:</label>
+            <input asp-for="Marca" type="text" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Modelo">Modelo:</label>
+            <input asp-for="Modelo" type="text" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Placa">Placa:</label>
+            <input asp-for="Placa" type="text" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Renavan">Renavan:</label>
+            <input asp-for="Renavan" type="text" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Cor">Cor:</label>
+            <input asp-for="Cor" type="text" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Ano">Ano:</label>
+            <input asp-for="Ano" type="text" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="TipoCombustivel">Tipo Combustivel:</label>
+            <input asp-for="TipoCombustivel" class="form-control" type="text"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="QntdPortas">Quantidade Portas:</label>
+            <input asp-for="QntdPortas" class="form-control" type="text"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Potencia">Potência:</label>
+            <input asp-for="Potencia" class="form-control" type="text"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Imagem">Imagem:</label>
+            <input asp-for="Imagem" class="form-control" type="file" name="file" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Categoria">Categoria:</label>
+            <select asp-items="@ViewBag.Categorias" class="form-control" asp-for="CategoriaId">
+                <option>  -- SELECIONE -- </option>
+            </select>
+        </div>
 
         <input type="submit" value="Salvar" />
     </fieldset>

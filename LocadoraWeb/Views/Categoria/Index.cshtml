@@ -1,53 +1,42 @@
 ﻿@model IEnumerable<LocadoraWeb.Models.Categoria>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista Categoria";
 }
 
-<h1>Index</h1>
+<h1 class="espacamento-baixo">Categoria</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Cadastrar" class="btn btn-info">Criar Novo</a>
 </p>
-<table class="table">
+<table class="table table-hover ">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.valorDiaria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CriadoEm)
-            </th>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Valor Diaria</th>
+            <th>Criado Em</th>
+            <th></th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.valorDiaria)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CriadoEm)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (Categoria categoriaCadastrado in Model)
+        {
+            <tr>
+                <td>@categoriaCadastrado.Id</td>
+                <td>@categoriaCadastrado.Nome</td>
+                <td>@categoriaCadastrado.Descricao</td>
+                <td>@categoriaCadastrado.valorDiaria</td>
+                <td>@categoriaCadastrado.CriadoEm</td>
+                <td>
+                    <a asp-action="Remover" asp-controller="Categoria" class="btn btn-danger btn-sm"
+                       asp-route-id="@categoriaCadastrado.Id">
+                        Remover
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

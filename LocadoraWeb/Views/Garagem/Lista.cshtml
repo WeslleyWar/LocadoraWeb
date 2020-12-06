@@ -1,0 +1,37 @@
+﻿@model IEnumerable<LocadoraWeb.Models.Garagem>
+
+@{
+    ViewData["Title"] = "Lista de Garagens";
+}
+
+<h1>Lista de Garagens</h1>
+
+<table class="table table-hover ">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nome</th>
+            <th>Cep</th>
+            <th>Rua</th>
+            <th>Bairro</th>
+            <th>Cidade</th>
+            <th>Numero</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Garagem garagemCadastrada in Model)
+        {
+            <tr>
+                <td>@garagemCadastrada.Id</td>
+                <td>@garagemCadastrada.Nome</td>
+                <td>@garagemCadastrada.Cep</td>
+                <td>@garagemCadastrada.Logradouro</td>
+                <td>@garagemCadastrada.Bairro</td>
+                <td>@garagemCadastrada.Localidade</td>
+                <td>@garagemCadastrada.Numero</td>
+            </tr>
+        }
+    </tbody>
+</table>
